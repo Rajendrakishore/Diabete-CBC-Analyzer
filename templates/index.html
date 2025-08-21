@@ -1,172 +1,60 @@
-
-
-    <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diabetes & CBC Analyzer</title>
-    
+    <title>Doctor Sahab — Diabetes Analyzer</title>
+      <link rel="stylesheet" href="style.css">
     <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .form-section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 10px; }
+        h2 { color: #2c3e50; }
+        .result { background: #f0f8ff; padding: 20px; border-radius: 10px; margin-top: 20px; }
         
-        h1 { color: #333; }
-        form { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; margin-bottom: 20px; }
-        input[type=text], input[type=number] { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
-        input[type=submit] { padding: 10px 20px; margin-top: 10px; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 4px; }
-        .error { color: red; }
-        .result { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; }
-        .result p { margin: 6px 0; }
-        /* General Page Styling */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #e6f0ff, #f9fbff);
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-/* Header */
-header {
-    background: #0077b6;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Form Container */
-.container {
-    width: 60%;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Labels & Inputs */
-label {
-    font-weight: bold;
-    display: block;
-    margin: 12px 0 6px;
-    color: #004d73;
-}
-
-input[type="text"], input[type="number"], select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 18px;
-    border: 1px solid #cfd8dc;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: 0.3s ease;
-}
-
-input:focus, select:focus {
-    border-color: #0077b6;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 119, 182, 0.4);
-}
-
-/* Button */
-button {
-    background: #0077b6;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background: #023e8a;
-}
-
-/* Result Box */
-.result-box {
-    margin-top: 25px;
-    padding: 20px;
-    background: #f1faff;
-    border-left: 6px solid #0077b6;
-    border-radius: 10px;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-
-footer {
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-}
-
-footer strong {
-    color: #ffdd00;  
-}
-
     </style>
 </head>
 <body>
-
-    <h1>Diabetes & CBC Analyzer</h1>
-
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-
+    <h1>🩺 Doctor Sahab — Diabetes & CBC Analyzer</h1>
     <form method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+        <div class="form-section">
+            <h2>Patient Details</h2>
+            Name: <input type="text" name="name"><br><br>
+            Age: <input type="number" name="age" min="1" required placeholder="Enter Age">
+<br><br>
+            Sex: <select name="sex">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
 
-        <label>Age:</label>
-        <input type="number" name="age" required>
+        <div class="form-section">
+            <h2>CBC Parameters</h2>
+            RBC: <input type="text" name="rbc"><br><br>
+            WBC/TLC: <input type="text" name="wbc"><br><br>
+            Platelets: <input type="text" name="platelets"><br><br>
+            Hemoglobin: <input type="text" name="hb"><br><br>
+        </div>
 
-        <label>Sex (M/F):</label>
-        <input type="text" name="sex" required>
-
-        <h3>CBC Values</h3>
-        <label>RBC:</label>
-        <input type="text" name="rbc" required>
-        <label>WBC:</label>
-        <input type="text" name="wbc" required>
-        <label>Platelets:</label>
-        <input type="text" name="platelets" required>
-        <label>Hemoglobin (Hb):</label>
-        <input type="text" name="hb" required>
-
-        <h3>Glycemic Values</h3>
-        <label>HbA1c:</label>
-        <input type="text" name="hba1c">
-        <label>Fasting Blood Sugar (FBS):</label>
-        <input type="text" name="fbs">
-        <label>Postprandial (PP):</label>
-        <input type="text" name="pp">
+        <div class="form-section">
+            <h2>Glycemic Parameters</h2>
+            HbA1c: <input type="text" name="hba1c"><br><br>
+            FBS: <input type="text" name="fbs"><br><br>
+            PP: <input type="text" name="pp"><br><br>
+        </div>
 
         <input type="submit" value="Analyze">
     </form>
 
     {% if result %}
-        <div class="result">
-            <h2>Analysis Result</h2>
-            <p><strong>Name:</strong> {{ result.name }}</p>
-            <p><strong>Age:</strong> {{ result.age }}</p>
-            <p><strong>Sex:</strong> {{ result.sex }}</p>
-            <p><strong>Diabetes Category:</strong> {{ result.diabetes_status }}</p>
-            <p><strong>Complication Risk:</strong> {{ result.risk }}</p>
-        </div>
+    <div class="result">
+        <h2>Result</h2>
+        <p><b>Name:</b> {{ result.name }} | <b>Age:</b> {{ result.age }} | <b>Sex:</b> {{ result.sex }}</p>
+        <p><b>Diabetes Category:</b> {{ result.diabetes_status }}</p>
+        <p><b>Complication Risk:</b> {{ result.risk }}</p>
+    </div>
     {% endif %}
-     <footer>
-    <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>
 
-    </footer>
+    <footer>
+    <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>
+</footer>
 
 </body>
 </html>
