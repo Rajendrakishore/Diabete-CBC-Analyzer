@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes & CBC Analyzer</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .form-section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 10px; }
+        h2 { color: #2c3e50; }
+        .result { background: #f0f8ff; padding: 20px; border-radius: 10px; margin-top: 20px; }
+        
+    </style>
+</head>
+<body>
+    <h1 style="background-color: #2c3e50; color: #ddd; padding: 2%; border-radius: 20%; "> <span style="margin-left: 30%;">🩺 Diabetes & CBC Analyzer 🩺</span></h1>
+    <form method="POST">
+        <div class="form-section">
+            <h2>Patient Details</h2>
+            Name: <input type="text" name="name"><br><br>
+            Age: <input type="number" name="age" min="1" required placeholder="Enter Age">
+<br><br>
+            Sex: <select name="sex">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+
+        <div class="form-section">
+            <h2>CBC Parameters</h2>
+            RBC: <input type="text" name="rbc"><br><br>
+            WBC/TLC: <input type="text" name="wbc"><br><br>
+            Platelets: <input type="text" name="platelets"><br><br>
+            Hemoglobin: <input type="text" name="hb"><br><br>
+        </div>
+
+        <div class="form-section">
+            <h2>Glycemic Parameters</h2>
+            HbA1c: <input type="text" name="hba1c"><br><br>
+            FBS: <input type="text" name="fbs"><br><br>
+            PP: <input type="text" name="pp"><br><br>
+        </div>
+
+        <input type="submit" value="Analyze">
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <h2>Result</h2>
+        <p><b>Name:</b> {{ result.name }} | <b>Age:</b> {{ result.age }} | <b>Sex:</b> {{ result.sex }}</p>
+        <p><b>Diabetes Category:</b> {{ result.diabetes_status }}</p>
+        <p><b>Complication Risk:</b> {{ result.risk }}</p>
+    </div>
+    {% endif %}
+
+    <footer>
+    <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>
+</footer>
+
+</body>
+</html>
