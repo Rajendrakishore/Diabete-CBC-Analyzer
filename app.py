@@ -81,41 +81,59 @@ def complication_risk(hba1c, cbc_severity):
 @app.route("/", methods=["GET", "POST"])
 def index():
    result = None
-    if request.method == "POST":
-        name = request.form.get("name")
-        age_str = request.form.get("age", "").strip()
-        if age_str.isdigit():
-            age = int(age_str)
-        else:
-            return render_template("index.html", error="⚠️ Please enter a valid age")
-        sex = request.form.get("sex")
+   error = None
+   if request.method == "POST":
+    try:
+        name = (request.form.get("name") or "").strip()
+        age_str = (request.form.get("age") or "").strip()
+        sex = (request.form.get("sex") or "").strip()
+
+        if not age_str.isdigit():
+            error = "⚠️ Please enter a valid age"
+            return render_template("index.html", result=None, error=error)
+
+        age = int(age_str)
 
         # CBC
-        rbc = float(request.form.get("rbc") or 0)
-        wbc = float(request.form.get("wbc") or 0)
-        platelets = float(request.form.get("platelets") or 0)
-        hb = float(request.form.get("hb") or 0)
+        def to_float(key):
+            val = request.form.get(key)
+            return float(val) if val not in (None, "",) else 0.0
 
-        # Glycemic
-        hba1c = request.form.get("hba1c")
-        hba1c = float(hba1c) if hba1c else None
-        fbs = request.form.get("fbs")
-        fbs = float(fbs) if fbs else None
-        pp = request.form.get("pp")
-        pp = float(pp) if pp else None
+        rbc = to_float("rbc")
+        wbc = to_float("wbc")
+        platelets = to_float("platelets")
+        hb = to_float("hb")
 
-        cbc_sev = assess_cbc(rbc,wbc,platelets,hb,sex)
-        diabetes_status = classify_glycemic(hba1c,fbs,pp)
-        risk = complication_risk(hba1c,cbc_sev)
+        # Glycemic (optional fields)
+        def to_opt_float(key):
+            val = request.form.get(key)
+            return float(val) if val not in (None, "",) else None
+
+        hba1c = to_opt_float("hba1c")
+        fbs = to_opt_float("fbs")
+        pp = to_opt_float("pp")
+
+        # ---- Your helper functions here (import or define above) ----
+        cbc_sev = assess_cbc(rbc, wbc, platelets, hb, sex)
+        diabetes_status = classify_glycemic(hba1c, fbs, pp)
+        risk = complication_risk(hba1c, cbc_sev)
 
         result = {
-            "name": name,
+            "name": name or "N/A",
             "age": age,
-            "sex": sex,
+            "sex": sex or "N/A",
             "diabetes_status": diabetes_status,
-            "risk": risk
-       
-         return render_template("index.html", result=result) }
+            "risk": risk,
+        }
+
+    except Exception as e:
+        # Show the error on the page instead of returning None
+        error = f"Unexpected error: {e}"
+        return render_template("index.html", result=None, error=error)
+
+# ALWAYS return a response
+   return render_template("index.html", result=result, error=error)
+ 
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)

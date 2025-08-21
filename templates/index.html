@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+    
     <h1>🩺Diabetes & CBC Analyzer</h1>
     <form method="POST">
         <div class="form-section">
@@ -41,19 +42,20 @@
         </div>
 
         <input type="submit" value="Analyze">
-        <div>
-    {% if result %}
-    <div class="result">
-        <p><strong>Name:</strong> {{ result.name }} | <strong>Age:</strong> {{ result.age }} | <strong>Sex:</strong> {{ result.sex }}</p>
-        <p><strong>Diabetes Category:</strong> {{ result.diabetes_status }}</p>
-        <p><strong>Complication Risk:</strong> {{ result.risk }}</p>
-    </div>
-    {% else %}
-        <p>No data to display.</p>
-    {% endif %}
-</div>
+        
     </form>
  
+  {% if result %}
+    <div class="result">
+        <h2>Analysis Result</h2>
+        <p><strong>Patient Name:</strong> {{ result.name }}</p>
+        <p><strong>Age:</strong> {{ result.age }}</p>
+        <p><strong>Sex:</strong> {{ result.sex }}</p>
+        <p><strong>Diabetes Risk:</strong> {{ result.risk }}</p>
+        <p><strong>Diabetes status:</strong> {{ result.diabetes_status }}</p>
+        
+    </div>
+  {% endif %}   
 
 
     <footer>
