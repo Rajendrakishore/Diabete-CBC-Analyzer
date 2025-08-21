@@ -43,14 +43,18 @@
         <input type="submit" value="Analyze">
     </form>
 
-    {% if result %}
-    <div class="result">
-        <h2>Result</h2>
-        <p><b>Name:</b> {{ result.name }} | <b>Age:</b> {{ result.age }} | <b>Sex:</b> {{ result.sex }}</p>
-        <p><b>Diabetes Category:</b> {{ result.diabetes_status }}</p>
-        <p><b>Complication Risk:</b> {{ result.risk }}</p>
-    </div>
-    {% endif %}
+  {% if result %}
+  <h2>Result</h2>
+  <p>Name: {{ result.name }}</p>
+  <p>Age: {{ result.age }}</p>
+  <p>Sex: {{ result.sex }}</p>
+  <p>Diabetes Category: {{ result.diabetes_status }}</p>
+  <p>Complication Risk: {{ result.risk }}</p>
+{% endif %}
+
+{% if error %}
+  <p style="color:red">{{ error }}</p>
+{% endif %}
 
     <footer>
     <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>
