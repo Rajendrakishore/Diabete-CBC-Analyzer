@@ -114,8 +114,8 @@ def index():
             "sex": sex,
             "diabetes_status": diabetes_status,
             "risk": risk
-        }
-    return render_template("index.html", result=result)
+       
+         return render_template("index.html", result=result) }
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
