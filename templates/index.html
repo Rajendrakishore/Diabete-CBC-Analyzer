@@ -51,9 +51,9 @@
         <p><strong>Diabetes Category:</strong> {{ result.diabetes_status }}</p>
         <p><strong>Complication Risk:</strong> {{ result.risk }}</p>
     </div>
-{% else %}
-    <p>No data to display.</p>
-{% endif %}
+    {% else %}
+        <p>No data to display.</p>
+    {% endif %}
 </div>
     <footer>
     <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>

@@ -80,6 +80,7 @@ def complication_risk(hba1c, cbc_severity):
 # ----------------- Routes -----------------
 @app.route("/", methods=["GET", "POST"])
 def index():
+    return render_template("index.html")
     result = None
     if request.method == "POST":
         name = request.form.get("name")
