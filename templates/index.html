@@ -41,10 +41,7 @@
         </div>
 
         <input type="submit" value="Analyze">
-    </form>
- 
-
-<div>
+        <div>
     {% if result %}
     <div class="result">
         <p><strong>Name:</strong> {{ result.name }} | <strong>Age:</strong> {{ result.age }} | <strong>Sex:</strong> {{ result.sex }}</p>
@@ -55,6 +52,10 @@
         <p>No data to display.</p>
     {% endif %}
 </div>
+    </form>
+ 
+
+
     <footer>
     <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>
 </footer>
