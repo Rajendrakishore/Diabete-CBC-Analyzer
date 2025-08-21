@@ -108,14 +108,14 @@ def index():
         diabetes_status = classify_glycemic(hba1c,fbs,pp)
         risk = complication_risk(hba1c,cbc_sev)
 
-        results = {
+        result = {
             "name": name,
             "age": age,
             "sex": sex,
             "diabetes_status": diabetes_status,
             "risk": risk
         }
-    return render_template("index.html", result=results)
+    return render_template("index.html", result=result)
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
