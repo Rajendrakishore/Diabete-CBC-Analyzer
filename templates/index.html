@@ -1,64 +1,76 @@
-<!DOCTYPE html>
-<html>
+
+
+    <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes & CBC Analyzer</title>
-      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        .form-section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 10px; }
-        h2 { color: #2c3e50; }
-        .result { background: #f0f8ff; padding: 20px; border-radius: 10px; margin-top: 20px; }
-        
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; }
+        form { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; margin-bottom: 20px; }
+        input[type=text], input[type=number] { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
+        input[type=submit] { padding: 10px 20px; margin-top: 10px; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 4px; }
+        .error { color: red; }
+        .result { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; }
+        .result p { margin: 6px 0; }
     </style>
 </head>
 <body>
-    <h1 style="background-color: #2c3e50; color: #ddd; padding: 2%; border-radius: 20%; "> <span style="margin-left: 30%;">🩺 Diabetes & CBC Analyzer 🩺</span></h1>
+
+    <h1>Diabetes & CBC Analyzer</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
     <form method="POST">
-        <div class="form-section">
-            <h2>Patient Details</h2>
-            Name: <input type="text" name="name"><br><br>
-            Age: <input type="number" name="age" min="1" required placeholder="Enter Age">
-<br><br>
-            Sex: <select name="sex">
-                <option>Male</option>
-                <option>Female</option>
-            </select>
-        </div>
+        <label>Name:</label>
+        <input type="text" name="name" required>
 
-        <div class="form-section">
-            <h2>CBC Parameters</h2>
-            RBC: <input type="text" name="rbc"><br><br>
-            WBC/TLC: <input type="text" name="wbc"><br><br>
-            Platelets: <input type="text" name="platelets"><br><br>
-            Hemoglobin: <input type="text" name="hb"><br><br>
-        </div>
+        <label>Age:</label>
+        <input type="number" name="age" required>
 
-        <div class="form-section">
-            <h2>Glycemic Parameters</h2>
-            HbA1c: <input type="text" name="hba1c"><br><br>
-            FBS: <input type="text" name="fbs"><br><br>
-            PP: <input type="text" name="pp"><br><br>
-        </div>
+        <label>Sex (M/F):</label>
+        <input type="text" name="sex" required>
+
+        <h3>CBC Values</h3>
+        <label>RBC:</label>
+        <input type="text" name="rbc" required>
+        <label>WBC:</label>
+        <input type="text" name="wbc" required>
+        <label>Platelets:</label>
+        <input type="text" name="platelets" required>
+        <label>Hemoglobin (Hb):</label>
+        <input type="text" name="hb" required>
+
+        <h3>Glycemic Values</h3>
+        <label>HbA1c:</label>
+        <input type="text" name="hba1c">
+        <label>Fasting Blood Sugar (FBS):</label>
+        <input type="text" name="fbs">
+        <label>Postprandial (PP):</label>
+        <input type="text" name="pp">
 
         <input type="submit" value="Analyze">
     </form>
 
-  {% if result %}
-  <h2>Result</h2>
-  <p>Name: {{ result.name }}</p>
-  <p>Age: {{ result.age }}</p>
-  <p>Sex: {{ result.sex }}</p>
-  <p>Diabetes Category: {{ result.diabetes_status }}</p>
-  <p>Complication Risk: {{ result.risk }}</p>
-{% endif %}
-
-{% if error %}
-  <p style="color:red">{{ error }}</p>
-{% endif %}
-
-    <footer>
+    {% if result %}
+        <div class="result">
+            <h2>Analysis Result</h2>
+            <p><strong>Name:</strong> {{ result.name }}</p>
+            <p><strong>Age:</strong> {{ result.age }}</p>
+            <p><strong>Sex:</strong> {{ result.sex }}</p>
+            <p><strong>Diabetes Category:</strong> {{ result.diabetes_status }}</p>
+            <p><strong>Complication Risk:</strong> {{ result.risk }}</p>
+        </div>
+    {% endif %}
+     <footer>
     <p>© 2025 Developed by <strong>Rajendra Kishore</strong></p>
-</footer>
+
+    </footer>
 
 </body>
 </html>
