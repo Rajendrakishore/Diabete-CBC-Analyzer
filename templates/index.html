@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes & CBC Analyzer</title>
-     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        
         h1 { color: #333; }
         form { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; margin-bottom: 20px; }
         input[type=text], input[type=number] { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
@@ -16,6 +16,102 @@
         .error { color: red; }
         .result { background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; }
         .result p { margin: 6px 0; }
+        /* General Page Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e6f0ff, #f9fbff);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #0077b6;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+.container {
+    width: 60%;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels & Inputs */
+label {
+    font-weight: bold;
+    display: block;
+    margin: 12px 0 6px;
+    color: #004d73;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #0077b6;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 119, 182, 0.4);
+}
+
+/* Button */
+button {
+    background: #0077b6;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #023e8a;
+}
+
+/* Result Box */
+.result-box {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f1faff;
+    border-left: 6px solid #0077b6;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+footer strong {
+    color: #ffdd00;  
+}
+
     </style>
 </head>
 <body>
